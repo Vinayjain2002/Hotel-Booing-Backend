@@ -6,6 +6,7 @@ const HotelSchema = new Schema({
     image: String,
     name: String,
     description: String,
+    // one hotel can have only one manager and is considered as the owner of hotel
     manager: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -19,6 +20,11 @@ const HotelSchema = new Schema({
     location: String,
     ratings: {type: Number, default: null},
     totalRooms: Number,
+    //example: roomsMap: {
+//     "single": "10 rooms",
+//     "double": "20 rooms",
+//     "suite": "5 rooms"
+// }
     roomsMap: {type: Map, of: String, required: true}
 })
 

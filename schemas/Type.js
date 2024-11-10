@@ -80,7 +80,6 @@ const RoomType = new GraphQLObjectType({
     name: "Room",
     fields: () => ({
         id: { type: GraphQLID },
-        images: { type: new GraphQLList(GraphQLString) },
         images: {
             type: new GraphQLList(new GraphQLObjectType({
                 name: "Image",

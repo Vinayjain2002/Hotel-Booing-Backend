@@ -25,6 +25,7 @@ const {
 
 const addBooking = { // For adding new booking
     type: BookingType,
+    // args which we require for booking
     args: {
         from: { type: new GraphQLNonNull(GraphQLDate) },
         to: { type: new GraphQLNonNull(GraphQLDate) },
@@ -88,7 +89,7 @@ const cancelBooking = { // For cancelling hotel
             await room.bookings.remove(args.id)
             await room.save()
             let res = await booking.delete()
-            return res
+            return res;
         }
     }
 }

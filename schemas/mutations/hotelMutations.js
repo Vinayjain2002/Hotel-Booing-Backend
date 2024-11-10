@@ -85,13 +85,13 @@ const deleteHotel = { // For deleting hotel
         id: { type: new GraphQLNonNull(GraphQLID) }
     },
     async resolve(parent, args) {
-        let hotel = await Hotel.findById(args.id)
+        let hotel = await Hotel.findById(args.id);
         if (!hotel) {
             throw new Error('Hotel not found.')
         }
         else {
             hotel.rooms.forEach(async r => {
-                let room = await Room.findById(r._id)
+                let room = await Room.findById(r._id);
                 room.bookings.forEach(async b => {
                     let booking = await Booking.findById(b._id)
                     await booking.delete()
@@ -99,7 +99,7 @@ const deleteHotel = { // For deleting hotel
                 await room.delete()
             })
             let res = await hotel.delete()
-            return res
+            return res;
         }
     }
 }

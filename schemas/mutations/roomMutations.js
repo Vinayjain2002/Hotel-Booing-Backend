@@ -103,8 +103,8 @@ const updateRoom = { // For updating room
                 hotelData.roomsMap.set(n.toString(), room.name)
             }
         })
-
-        await hotelData.save()
+        await room.save();
+        await hotelData.save();
         return room
     }
 }
@@ -124,8 +124,10 @@ const deleteRoom = { // For deleting room
             room.roomNumbers.forEach(n => {
                 hotel.roomsMap.delete(n.toString())
             })
-            await hotel.rooms.remove(args.id)
+            // removing the type of room 
+            await hotel.rooms.remove(args.id);
             await hotel.save()
+            // deleting the bookings also
             room.bookings.forEach(async b => {
                 let booking = await Booking.findById(b._id)
                 await booking.delete()

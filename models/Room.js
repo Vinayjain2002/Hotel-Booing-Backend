@@ -7,6 +7,7 @@ const RoomSchema = new Schema({
         url: String, 
         uuid: String
     }],
+    // type of room it is
     name: String,
     description: String,
     occupancy: Number,

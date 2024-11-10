@@ -38,15 +38,16 @@ const getAllRooms = { // For getting room details
         id: { type: new GraphQLNonNull(GraphQLID) }
     },
     async resolve(parent, args, req) {
-        let hotel = await Hotel.findById(args.id)
         if (!args.id) {
             throw new Error("Hotel ID is required.")
         }
+        let hotel = await Hotel.findById(args.id)
         let res = []
         res = hotel.rooms.map(async r => await Room.findById(r))
         return res
     }
 }
+
 
 const getAvailableRooms = { // For getting room details
     type: new GraphQLList(AvailableRoomType),
@@ -95,6 +96,7 @@ const getAvailableRooms = { // For getting room details
 
             let map = new Map()
             let occRooms = []
+            // TODO: need to correct the logic to check if a room is occupied or not
             bookings.forEach(b => {
                 let k = b.hotel.toString()
                 let c = map.has(k) ? map.get(k) : new Set()
@@ -106,6 +108,7 @@ const getAvailableRooms = { // For getting room details
 
             res = hotel.rooms.map(async r => {
                 let room = await Room.findById(r)
+                // it is avaible romm no array of a specific type of the room
                 let rnArr = []
                 room.roomNumbers.forEach(r => {
                     if(!occRooms.includes(r)) {

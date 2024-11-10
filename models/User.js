@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     password: String, 
     dob: Date,
     accessToken: String,
+    // used for auth of user for long time
     refreshToken: String,
     accessTokenExp: String,
     refreshTokenExp: String,
